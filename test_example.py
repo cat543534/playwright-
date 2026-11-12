@@ -7,19 +7,22 @@ from playwright.sync_api import Page, expect
 
 def test_has_title(page: Page):
     # эта строка переходит на страницу по URL
-    page.goto("https://monkeytype.com/") # поменял ссылку
+    page.goto("https://metanit.com/") # поменял ссылку
 
-    # проверяет наличие слов "".
-    expect(page).to_have_title(re.compile("Playwright"))
+    
+    page.get_by_title("Посмотреть меню").click()
 
 def test_get_started_link(page: Page):
-    page.goto("https://monkeytype.com/") # поменял ссылку
+    page.goto("https://metanit.com/") # поменял ссылку
 
     # Click the get started link.
-    page.get_by_role("link", name="Get started").click()
+    page.get_by_role("link", name="Python").click()
 
-    # Ожидается, что на странице будет заголовок с названием Installation.
-    expect(page.get_by_role("heading", name="Installation")).to_be_visible()
+    
+    expect(page.get_by_role("heading", name="О разделе")).to_be_visible()
+    expect(page.locator("#container")).to_contain_text("Руководство по Python")
+
+
 
 # Локаторы представляют собой способ поиска элемента(ов) на странице в любой момент времени
 # эта строка содаёт локатор
